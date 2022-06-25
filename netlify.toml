@@ -2,6 +2,7 @@
   NPM_FLAGS = "--version"
 
 [build]
+  publish = "dist/"
   command = "npx pnpm install --store=node_modules/.pnpm-store && npx pnpm build"
   ignore = "git diff --quiet $COMMIT_REF $CACHED_COMMIT_REF -- /"
 
@@ -25,3 +26,18 @@
     from = "/:lang/*"
     to = "/:lang/404/"
     status = 404
+
+  [[headers]]
+    for = "/*"
+    [headers.values]
+      Cache-Control = "s-maxage=31536000, stale-while-revalidate=60"
+  
+  [[headers]]
+    for = "/*.css"
+    [headers.values]
+      Cache-Control = "public, max-age=31536000, immutable"
+
+  [[headers]]
+    for = "/*.js"
+    [headers.values]
+      Cache-Control = "public, max-age=31536000, immutable"
