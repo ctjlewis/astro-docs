@@ -28,7 +28,7 @@
     status = 404
 
   [[headers]]
-    for = "/*"
+    for = "/*/"
     [headers.values]
       Cache-Control = "s-maxage=31536000, stale-while-revalidate=60"
   
